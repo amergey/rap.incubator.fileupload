@@ -144,8 +144,8 @@ public class UploadPanel extends Composite implements FileUploadListener {
     layout.marginHeight = 0;
     setLayout( layout );
     browseButton = new FileUpload( this, SWT.NONE );
-    browseButton.setText( "Browse" );
-    browseButton.setToolTipText( "Select a file" );
+    browseButton.setText( FileDialogMessages.get().UploadPanel_BrowseButtonText );
+    browseButton.setToolTipText( FileDialogMessages.get().UploadPanel_BrowseButtonTooltip );
     browseButton.addSelectionListener( new SelectionAdapter() {
       @Override
       public void widgetSelected( SelectionEvent event ) {
@@ -158,15 +158,15 @@ public class UploadPanel extends Composite implements FileUploadListener {
       }
     } );
     fileText = new Text( this, SWT.BORDER );
-    fileText.setToolTipText( "Selected file" );
+    fileText.setToolTipText( FileDialogMessages.get().UploadPanel_FileTextTooltip );
     fileText.setEditable( false );
     if( hasStyle( PROGRESS ) ) {
       progressBar = new ProgressBar( this, SWT.HORIZONTAL | SWT.SMOOTH );
-      progressBar.setToolTipText( "Upload progress" );
+      progressBar.setToolTipText( FileDialogMessages.get().UploadPanel_ProgressBarTooltip );
       progressBar.setMinimum( 0 );
       progressBar.setMaximum( 100 );
       progressLabel = new Label( this, SWT.NONE );
-      progressLabel.setText( progressBar.getSelection() + "%" );
+      progressLabel.setText( progressBar.getSelection() + FileDialogMessages.PERCENT );
     }
     if( hasStyle( REMOVEABLE ) ) {
       removeButton = new Button( this, SWT.PUSH );
@@ -176,7 +176,7 @@ public class UploadPanel extends Composite implements FileUploadListener {
         deleteImage = ImageUtil.getImage( getDisplay(), "delete_obj.gif" );
       }
       removeButton.setImage( deleteImage );
-      removeButton.setToolTipText( "Remove file" );
+      removeButton.setToolTipText( FileDialogMessages.get().UploadPanel_RemoveButtonTooltip );
       removeButton.addSelectionListener( new SelectionAdapter() {
         @Override
         public void widgetSelected( SelectionEvent e ) {
@@ -235,11 +235,11 @@ public class UploadPanel extends Composite implements FileUploadListener {
 
   public void validate() {
     if( validationHandler == null || validationHandler.validate( fileText.getText() ) ) {
-      fileText.setToolTipText( "Selected file" );
+      fileText.setToolTipText( FileDialogMessages.get().UploadPanel_FileTextTooltip );
       // TODO replace this with something from theming
       fileText.setBackground( null );
     } else {
-      fileText.setToolTipText( "Warning: Selected file does not match filter" );
+      fileText.setToolTipText( FileDialogMessages.get().UploadPanel_FileTextWarnNotMatchTooltip );
       // TODO replace this with something from theming
       fileText.setBackground( Display.getCurrent().getSystemColor( SWT.COLOR_YELLOW ) );
       validationHandler.updateEnablement();
@@ -254,8 +254,8 @@ public class UploadPanel extends Composite implements FileUploadListener {
         int percent = ( int )Math.floor( fraction * 100 );
         if( progressBar != null && !progressBar.isDisposed() ) {
           progressBar.setSelection( percent );
-          progressBar.setToolTipText( "Upload progress: " + percent + "%" );
-          progressLabel.setText( percent + "%" );
+          progressBar.setToolTipText( FileDialogMessages.get().UploadPanel_ProgressBarTooltip + percent + FileDialogMessages.PERCENT );
+          progressLabel.setText( percent + FileDialogMessages.PERCENT );
         }
         // allow the uploadFinished call to notify collector of 100% progress since
         // the file is actually written then
@@ -276,8 +276,8 @@ public class UploadPanel extends Composite implements FileUploadListener {
         int percent = 100;
         if( progressBar != null && !progressBar.isDisposed() ) {
           progressBar.setSelection( percent );
-          progressBar.setToolTipText( "Upload progress: " + percent + "%" );
-          progressLabel.setText( percent + "%" );
+          progressBar.setToolTipText( FileDialogMessages.get().UploadPanel_ProgressBarTooltip + percent + FileDialogMessages.PERCENT );
+          progressLabel.setText( percent + FileDialogMessages.PERCENT );
         }
         if( progressCollector != null ) {
           progressCollector.updateProgress( handler, percent );

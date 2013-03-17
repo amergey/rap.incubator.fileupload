@@ -40,7 +40,7 @@ public class ProgressCollector {
       if( totalProgressBar != null && !totalProgressBar.isDisposed() ) {
         int percent = ( int )Math.floor( totalProgress / maxProgress * 100 );
         totalProgressBar.setSelection( percent );
-        totalProgressBar.setToolTipText( "Total upload progress: " + percent + "%" );
+        totalProgressBar.setToolTipText( FileDialogMessages.get().ProgressCollector_TotalUploadProgress + percent + FileDialogMessages.PERCENT );
       }
       if( maxProgress == totalProgress ) {
         validationHandler.updateEnablement();

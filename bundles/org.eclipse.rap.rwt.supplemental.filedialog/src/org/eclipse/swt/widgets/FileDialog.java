@@ -31,6 +31,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.internal.widgets.ExtensionValidationStrategy;
+import org.eclipse.swt.internal.widgets.FileDialogMessages;
 import org.eclipse.swt.internal.widgets.ImageUtil;
 import org.eclipse.swt.internal.widgets.ProgressCollector;
 import org.eclipse.swt.internal.widgets.UploadPanel;
@@ -467,7 +468,7 @@ public class FileDialog extends Dialog {
     filterSelector.setLayoutData( new GridData( SWT.FILL, SWT.FILL, false, false ) );
     totalProgressBar = new ProgressBar( footerComp, SWT.HORIZONTAL | SWT.SMOOTH );
     totalProgressBar.setLayoutData( new GridData( SWT.FILL, SWT.FILL, true, false ) );
-    totalProgressBar.setToolTipText( "Total upload progress" );
+    totalProgressBar.setToolTipText( FileDialogMessages.get().ProgressCollector_TotalUploadProgress );
     totalProgressBar.setMaximum( 100 );
     progressCollector.setProgressBar( totalProgressBar );
     return main;
@@ -511,7 +512,7 @@ public class FileDialog extends Dialog {
       addImage = ImageUtil.getImage( parent.getDisplay(), "add_obj.gif" );
     }
     addFileSelectorButton.setImage( addImage );
-    addFileSelectorButton.setToolTipText( "Add file" );
+    addFileSelectorButton.setToolTipText( FileDialogMessages.get().FileDialog_FileSelectorTooltip );
     addFileSelectorButton.addSelectionListener( new SelectionAdapter() {
       @Override
       public void widgetSelected( SelectionEvent e ) {
@@ -565,12 +566,12 @@ public class FileDialog extends Dialog {
 
   private Combo createFilterSelector( Composite headerComp ) {
     final Combo filterCombo = new Combo( headerComp, SWT.DROP_DOWN | SWT.READ_ONLY );
-    filterCombo.setToolTipText( "Selected filename filter" );
+    filterCombo.setToolTipText( FileDialogMessages.get().FileDialog_FiterComboTooltip );
     String[] names = getFilterNames();
     String[] exts = getFilterExtensions();
     if( ( names == null || names.length == 0 ) && ( exts == null || exts.length == 0 ) ) {
       names = new String[]{
-        "All Files"
+        FileDialogMessages.get().FileDialog_AllFilesExtension
       };
       exts = new String[]{
         "*.*"
@@ -663,8 +664,8 @@ public class FileDialog extends Dialog {
     }
     uploadLocked = true;
     if( needsProcessing.size() > 0 ) {
-      okButton.setText( "Uploading..." );
-      okButton.setToolTipText( "Waiting for uploads to finish" );
+      okButton.setText( FileDialogMessages.get().FileDialog_OkButtonUploadingText );
+      okButton.setToolTipText( FileDialogMessages.get().FileDialog_OkButtonTooltip );
       okButton.setEnabled( false );
       if( addFileSelectorButton != null ) {
         addFileSelectorButton.setEnabled( false );
@@ -706,8 +707,8 @@ public class FileDialog extends Dialog {
             }
             shell.close();
           } else {
-            okButton.setText( "Uploading..." );
-            okButton.setToolTipText( "Waiting for uploads to finish" );
+            okButton.setText( FileDialogMessages.get().FileDialog_OkButtonUploadingText );
+            okButton.setToolTipText( FileDialogMessages.get().FileDialog_OkButtonTooltip );
             okButton.setEnabled( false );
           }
         } else {
@@ -719,7 +720,7 @@ public class FileDialog extends Dialog {
             }
           }
           if( !enabled ) {
-            okButton.setToolTipText( "Specify files in all empty selectors to continue." );
+            okButton.setToolTipText( FileDialogMessages.get().FileDialog_OkButtonTooltipDisable );
           } else {
             okButton.setToolTipText( "" );
           }
